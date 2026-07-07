@@ -1,1 +1,152 @@
-
+{
+  "name": "AI Weather Report Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "https://api.open-meteo.com/v1/forecast?latitude=24.8607&longitude=67.0011&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weather_code&timezone=auto",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        688,
+        112
+      ],
+      "id": "f7ece971-b5df-445b-a27b-228d77a20cc0",
+      "name": "Weather Fetch"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-flash",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-flash"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "={{ JSON.stringify($json) }}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {
+          "systemMessage": "=You are a human Growth Strategist copywriter writing directly to the Founder of Keystone Digital Hub. Write a conversational, natural, and energetic weather greeting. Avoid any robotic transitions, synthetic formatting, or dashes (—).\n\nToday's current date context is July 2026.\n\nYour task:\n1. Parse the provided JSON data. Look ONLY at index [0] of the daily arrays (e.g., daily.time[0]).\n2. Extract the exact date from `time[0]`, max temp from `temperature_2m_max[0]`, min temp from `temperature_2m_min[0]`, and precipitation probability from `precipitation_probability_max[0]`.\n3. Map `weather_code[0]` to conditions: 0 = Clear, 1-3 = Partly Cloudy, 51-55 = Drizzle, 61-65 = Rainy.\n4. Convert the extracted date string into its corresponding day name (e.g., Tuesday).\n\nFormatting Rules (Strict):\n- Use proper line breaks (paragraphs) just like a real human writes an email. \n- Never use long dashes (—) or robotic connections. Use natural punctuation.\n- Start exactly with: \"Good Morning ☀️\" followed by a blank line.\n- Next paragraph: A warm, human opening sentence mentioning the specific day and date (e.g., \"Hope you're having an awesome start to your Tuesday, July 7!\").\n- Next paragraph: Smoothly weave the weather stats (Max Temp, Min Temp, Condition, and Rain Probability) into a punchy business narrative. Make it sound motivational, not like a data dump.\n- Next paragraph: An energetic, closing line matching the vibe (e.g., \"The setup is perfect to smash our goals today. Let's make it count!\").\n- Sign-off exactly as:\n  \n  Best regards,\n  Keystone's Weather Reporter\n\n- Strictly output ONLY the plain text message. Under 110 words total."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        880,
+        112
+      ],
+      "id": "09170b56-a57d-4989-831c-bce4dad0164c",
+      "name": "Weather Info",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "3kLRn6iTGAPhxMm3",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "contact.keystonehub@gmail.com",
+        "subject": "Today weather report",
+        "emailType": "text",
+        "message": "={{ $json.content.parts[0].text }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1216,
+        112
+      ],
+      "id": "4e1f2b29-4ee4-4130-985a-3a53deda6128",
+      "name": "Send a message",
+      "webhookId": "8e9b2cf1-d249-450e-8580-9b7a6d09e6fb",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "DY8HK9dfksymgXYI",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 8,
+              "triggerAtMinute": 2
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        480,
+        112
+      ],
+      "id": "ed703b50-e9a8-442b-909a-5a14d764b5a5",
+      "name": "Schedule Trigger"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Weather Fetch": {
+      "main": [
+        [
+          {
+            "node": "Weather Info",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Weather Info": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Weather Fetch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "c5e7e65a-2d9a-4309-80c8-43c7cfb69b54",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "f196bee45d2728d4ed760605b6ad024dae97f017f3798fd6a895b2256fd95ddd"
+  },
+  "nodeGroups": [],
+  "id": "lCj5oOQGamVibSdv",
+  "tags": []
+}
