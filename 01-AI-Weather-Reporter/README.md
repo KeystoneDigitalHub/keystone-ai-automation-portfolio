@@ -1,22 +1,22 @@
 # AI Weather Reporter
 
-## Overview
+## Objective
 
-This workflow automatically fetches the daily weather, generates a human-friendly summary using Google Gemini, and emails the report every morning.
+Automatically fetch daily weather data, generate a natural weather briefing using Gemini AI, and email it every morning.
 
 ---
 
-## Workflow Architecture
+## Workflow
 
 Schedule Trigger
 
 ↓
 
-Weather API
+HTTP Request (Open Meteo API)
 
 ↓
 
-Google Gemini
+Google Gemini 2.5 Flash
 
 ↓
 
@@ -37,13 +37,23 @@ Gmail
 
 - n8n
 - Open Meteo API
-- Google Gemini
+- Google Gemini 2.5 Flash
 - Gmail
 
 ---
 
-## Version
+## Skills Learned
 
-v1.0
+- Schedule Trigger
+- HTTP Request
+- Prompt Engineering
+- AI Text Generation
+- Gmail Automation
 
-Status: Completed
+---
+
+## Status
+
+Completed ✅
+
+Version 1.0

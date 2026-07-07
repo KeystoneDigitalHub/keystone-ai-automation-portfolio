@@ -1,10 +1,8 @@
 # Keystone AI Automation Portfolio
 
-Welcome!
+Welcome to my public AI Engineering portfolio.
 
-This repository documents my journey of becoming an AI Automation Engineer by building real-world AI workflows, autonomous systems, and AI agents.
-
-My focus is not only learning AI but implementing practical solutions that solve business problems using automation.
+This repository documents my journey of building AI automations, AI agents, and autonomous business systems using n8n, Google Gemini, APIs, and modern AI engineering practices.
 
 ---
 
@@ -12,21 +10,21 @@ My focus is not only learning AI but implementing practical solutions that solve
 
 Build → Test → Improve → Ship
 
+My goal is not just to automate tasks.
+
+I'm building AI systems that can observe, reason, act, verify, and continuously improve.
+
 Every workflow inside this repository represents a completed engineering milestone.
 
 ---
 
 ## Current Roadmap
 
-✅ AI Weather Reporter
-
-⏳ Workflow #2
-
-⏳ Workflow #3
-
-🚧 Autonomous SEO Discovery Engine (MVP)
-
-🚧 Autonomous Multi-Agent System
+- ✅ AI Weather Reporter
+- ⏳ AI Workflow #2
+- ⏳ AI Workflow #3
+- 🚧 Autonomous SEO Discovery Engine (MVP)
+- 🚧 AI Agent Framework
 
 ---
 
@@ -46,17 +44,22 @@ Every workflow inside this repository represents a completed engineering milesto
 
 01-AI-Weather-Reporter
 
-02-...
+02-AI-Workflow
 
-03-...
+03-AI-Workflow
 
 Autonomous-SEO-Discovery-Engine
 
 ---
 
-## About Me
+## Learning Philosophy
 
-I'm Shahan Ali,
-Founder of Keystone Digital Hub.
+Build → Test → Improve → Ship
 
-Currently documenting my public journey of learning AI Engineering through practical implementation.
+---
+
+## Author
+
+Shahan Ali
+
+Founder — Keystone Digital Hub
